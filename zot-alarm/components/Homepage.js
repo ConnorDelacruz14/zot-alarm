@@ -17,23 +17,8 @@ export default function Homepage({ navigation }) {
   const [onTimeRate, setOnTimeRate] = useState(0);
   const [tuitionLost, setTuitionLost] = useState(0);
   const [nextClass, setNextClass] = useState({});
-  Alert.alert(classList[0]);
-  function sendData() {
-    const inputData = {}; // get user's input data
 
-    fetch("http://localhost:5000/process_data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(inputData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Data received from the server:", data);
-      });
-  }
-
+  /*
   React.useEffect(() => {
     fetch("http://localhost:5000/get_data")
       .then((response) => response.json())
@@ -46,7 +31,8 @@ export default function Homepage({ navigation }) {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, []); */
+
   return (
     <View style={styles.app_container}>
       <Item title="Today's Most Missed Classes" style={styles.item}></Item>
@@ -59,12 +45,10 @@ export default function Homepage({ navigation }) {
         <SmallItem title="Next Class" style={styles.small_item}></SmallItem>
       </View>
       <View style={{ display: "flex", flexDirection: "row" }}>
+        <Text style={styles.attendance_rate}>97% Attendance Rate</Text>
         <Text style={styles.attendance_rate}>
-          {attendanceRate}% Attendance Rate
-        </Text>
-        <Text style={styles.attendance_rate}>
-          {onTimeRate}
-          {"%                On-time Rate "}
+          {82}
+          {"%                 On-time Rate "}
         </Text>
       </View>
       <Taskbar navigation={navigation}></Taskbar>
