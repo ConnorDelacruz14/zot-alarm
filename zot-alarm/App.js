@@ -17,10 +17,18 @@ export default function App() {
           name="Homepage"
           component={Homepage}
           options={() => ({
-            // headerBackVisible: false,
+            headerBackVisible: false,
           })}
         />
-        <Stack.Screen name="Alarms" component={Alarms}></Stack.Screen>
+        <Stack.Screen
+          name="Alarms"
+          component={Alarms}
+          options={() => ({
+            headerStyle: {
+              backgroundColor: "black",
+            },
+          })}
+        ></Stack.Screen>
         <Stack.Screen name="Friends" component={Friends}></Stack.Screen>
         <Stack.Screen name="Graphs" component={Graphs}></Stack.Screen>
       </Stack.Navigator>

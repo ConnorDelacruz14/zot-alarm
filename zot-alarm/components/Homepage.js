@@ -1,10 +1,10 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { Component } from "react";
 import Friends from "./Friends";
 import Alarms from "./Alarms";
 import Graphs from "./Graphs";
 
-class Item extends Component {
+export class Item extends Component {
   render() {
     return (
       <Pressable style={this.props.style}>
@@ -122,12 +122,13 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     height: 100,
     padding: 30,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#D3D3D3",
     position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
   },
+
   icon: {
     width: 40,
     height: 40,
