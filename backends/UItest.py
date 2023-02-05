@@ -49,39 +49,42 @@ def add_courses():
     
     user_courses = []
     while True:
-        user_dep = input("What is your department: ").upper()
-        print(get_all_courses()[user_dep])
+        try:
+            user_dep = input("What is your department: ").upper()
+            print(get_all_courses()[user_dep])
 
-        user_cdnum = input("What is your course number: ")
-        all_sections = get_sections(current_term, current_quarter, user_dep, user_cdnum)
-        for section in all_sections:
-            print(section['sectionCode'], end=" ")
-        print()
+            user_cdnum = input("What is your course number: ")
+            all_sections = get_sections(current_term, current_quarter, user_dep, user_cdnum)
+            for section in all_sections:
+                print(section['sectionCode'], end=" ")
+            print()
 
-        user_section = int(input("What is your section code: "))
-        meeting_info = get_meeting_info(all_sections, user_section)
-        if len(meeting_info[0]) > 1:    
-            print("Your instructors are ", end = "")
-        else:
-            print("Your instructor is ", end = "")
-        for instructor in meeting_info[0]:
-            print(instructor, end = "")
-        print(".")
+            user_section = int(input("What is your section code: "))
+            meeting_info = get_meeting_info(all_sections, user_section)
+            if len(meeting_info[0]) > 1:    
+                print("Your instructors are ", end = "")
+            else:
+                print("Your instructor is ", end = "")
+            for instructor in meeting_info[0]:
+                print(instructor, end = "")
+            print(".")
 
-        print("Schedule:", meeting_info[1])
+            print("Schedule:", meeting_info[1])
 
-        print("Final's Date:", meeting_info[2], end="\n\n")
+            print("Final's Date:", meeting_info[2], end="\n\n")
 
-        meeting_info[1][0]['course'] = f"{user_dep} {user_cdnum}"
-        user_courses.append(meeting_info[1][0])
-        if check_conflict(user_courses):
-            print("The following course ", user_dep, user_cdnum, " has not been added due to schedule conflicts.", sep = "")
-            user_courses.pop()
+            meeting_info[1][0]['course'] = f"{user_dep} {user_cdnum}"
+            user_courses.append(meeting_info[1][0])
+            if check_conflict(user_courses):
+                print("The following course ", user_dep, user_cdnum, " has not been added due to schedule conflicts.", sep = "")
+                user_courses.pop()
 
-        isDone = input("Continue Adding (y/n): ")
-        print()
-        if isDone == "n":
-            break
+            isDone = input("Continue Adding (y/n): ").lower()
+            print()
+            if isDone == "n":
+                break
+        except Exception:
+            print("Error inputs. Please try again.")
 
     return user_courses
 
@@ -142,4 +145,4 @@ def tuition_loss_amount(total_units_applied, missed_class_units, missed_minutes,
     return "Total Tuition Loss: $" + str(math.ceil(missed_cost))
 
 #Story of Rayyaan
-print(tuition_loss_amount(12, 4, 50, 10000, "fall"))
+#print(tuition_loss_amount(16, 4, 80, 5250, "winter"))
