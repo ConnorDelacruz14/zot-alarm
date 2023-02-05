@@ -20,7 +20,7 @@ export default function Loginpage({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={require("./assets/logo.png")}></Image>
+      <Image style={styles.logo} source={require("../assets/logo.png")}></Image>
       <Text style={styles.title_text}>Zot Alarm!</Text>
       <View>
         <TextInput

@@ -1,12 +1,15 @@
-import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { Component } from "react";
+import Friends from "./Friends";
+import Alarms from "./Alarms";
+import Graphs from "./Graphs";
 
 class Item extends Component {
   render() {
     return (
-      <View style={this.props.style}>
+      <Pressable style={this.props.style}>
         <Text style={{ textAlign: "center" }}>{this.props.title}</Text>
-      </View>
+      </Pressable>
     );
   }
 }
@@ -18,6 +21,10 @@ class SmallItem extends Item {
 }
 
 export default function Homepage({ navigation }) {
+  let attendance_rate = 95;
+  let on_time_rate = 87;
+  let tuition_lost = "487";
+  let next_class = {};
   return (
     <View style={styles.app_container}>
       <Item title="Today's Most Missed Classes" style={styles.item}></Item>
@@ -27,20 +34,49 @@ export default function Homepage({ navigation }) {
           title="Total Tuition Lost"
           style={styles.small_item}
         ></SmallItem>
-        <SmallItem title="Your Schedule" style={styles.small_item}></SmallItem>
+        <SmallItem title="Next Class" style={styles.small_item}></SmallItem>
       </View>
-      <Text style={styles.attendance_rate}>97% Attendance Rate</Text>
-      <Taskbar></Taskbar>
+      <View style={{ display: "flex", flexDirection: "row" }}>
+        <Text style={styles.attendance_rate}>
+          {attendance_rate}% Attendance Rate
+        </Text>
+        <Text style={styles.attendance_rate}>
+          {on_time_rate}
+          {"%                On-time Rate "}
+        </Text>
+      </View>
+      <Taskbar navigation={navigation}></Taskbar>
     </View>
   );
 }
 
-const Taskbar = () => {
+const Taskbar = ({ navigation }) => {
   return (
     <View style={styles.taskbar_container}>
-      <Image source={require("./assets/alarm-clock.png")} style={styles.icon} />
-      <Image source={require("./assets/friends.png")} style={styles.icon} />
-      <Image source={require("./assets/graphs.png")} style={styles.icon} />
+      <Pressable
+        onPress={() => {
+          navigation.navigate(Alarms);
+        }}
+      >
+        <Image
+          source={require("../assets/alarm-clock.png")}
+          style={styles.icon}
+        />
+      </Pressable>
+      <Pressable
+        onPress={() => {
+          navigation.navigate(Friends);
+        }}
+      >
+        <Image source={require("../assets/friends.png")} style={styles.icon} />
+      </Pressable>
+      <Pressable
+        onPress={() => {
+          navigation.navigate(Graphs);
+        }}
+      >
+        <Image source={require("../assets/graphs.png")} style={styles.icon} />
+      </Pressable>
     </View>
   );
 };
@@ -72,11 +108,11 @@ const styles = StyleSheet.create({
   },
 
   attendance_rate: {
-    fontSize: 50,
+    fontSize: 20,
     fontWeight: "bold",
     color: "green",
     textAlign: "center",
-    width: 300,
+    width: 150,
     paddingTop: 30,
   },
 
