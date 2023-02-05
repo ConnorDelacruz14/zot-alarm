@@ -29,7 +29,7 @@ def get_sections(term, quarter, department, number):
         # section_code = schedule_dict['schools'][0]['departments'][0]['courses'][0]['sections'][0]['sectionCode']
         
         return schedule_dict['schools'][0]['departments'][0]['courses'][0]['sections']
-    else:
+    except:
         raise Exception("Nonexistent Course")
 
 def get_meeting_info(sections_list, section_code):

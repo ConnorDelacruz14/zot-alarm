@@ -1,5 +1,6 @@
 from apirequests import *
 from datetime import datetime, timedelta
+import math
 
 def check_conflict(schedule):
     for i in range(len(schedule) - 1):
@@ -101,3 +102,44 @@ def find_next_class(schedule):
                 return f"Your next class is {course['course']} in {course['bldg']} building starting at {start}."
 
     return "You do not have any classes today."
+
+
+def missed_classes(start_time, schedule):
+    current_day = datetime.now().strftime("%A")
+    start_time = datetime.strptime(start_time, "%I:%M%p")
+
+    missed = []
+    for course in schedule:
+        if course['days'].find(current_day[:2]) != -1:
+            course_start, course_end = map(str.strip, course['time'].split("-"))
+            course_start_time = datetime.strptime(course_start, "%I:%M%p")
+            course_end_time = datetime.strptime(course_end, "%I:%M%p")
+            if start_time <= course_start_time <= datetime.now() < course_end_time:
+                missed.append(course['course'])
+
+    return missed
+
+
+def check_attendance(missed_courses, attended_courses):
+    for acourse in attended_courses:
+        missed_courses.pop(missed_courses.index(acourse))
+    return missed_courses
+
+
+def tuition_loss_amount(total_units_applied, missed_class_units, missed_minutes, tuition_per_quarter, term):
+    if (term.upper() == "FALL"):
+        off_days = 24
+        vacation_cost = off_days/7 * 150
+    elif (term.upper() == "WINTER" or term.upper() == "SPRING"):
+        off_days = 7
+        vacation_cost = off_days/7 * 150
+    else:
+        vacation_cost = 0
+    
+    total_cost = (tuition_per_quarter/total_units_applied)*missed_class_units - vacation_cost
+    proportion = total_cost/1500
+    missed_cost = missed_minutes*proportion
+    return "Total Tuition Loss: $" + str(math.ceil(missed_cost))
+
+#Story of Rayyaan
+print(tuition_loss_amount(12, 4, 50, 10000, "fall"))
