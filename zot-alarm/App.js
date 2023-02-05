@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Homepage from "./components/Homepage";
 import Loginpage from "./components/Loginpage";
+import CourseAdd from "./components/CourseAdd";
 import Alarms from "./components/Alarms";
 import Friends from "./components/Friends";
 import Graphs from "./components/Graphs";
@@ -16,6 +17,13 @@ export default function App() {
         <Stack.Screen
           name="Homepage"
           component={Homepage}
+          options={() => ({
+            headerBackVisible: false,
+          })}
+        />
+        <Stack.Screen
+          name="CourseAdd"
+          component={CourseAdd}
           options={() => ({
             headerBackVisible: false,
           })}

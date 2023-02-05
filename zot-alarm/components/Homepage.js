@@ -7,6 +7,9 @@ import { Item, SmallItem } from "./Items";
 import { useState } from "react";
 
 export default function Homepage({ navigation }) {
+  Alert.alert(
+    "You missed your 9:30 lecture! Consider setting an alarm next time dummy."
+  );
   const [attendanceRate, setAttendanceRate] = useState(0);
   const [onTimeRate, setOnTimeRate] = useState(0);
   const [tuitionLost, setTuitionLost] = useState(0);
