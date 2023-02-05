@@ -5,15 +5,34 @@ import Alarms from "./Alarms";
 import Graphs from "./Graphs";
 import { Item, SmallItem } from "./Items";
 import { useState } from "react";
+import { useRoute } from "@react-navigation/native";
 
 export default function Homepage({ navigation }) {
   Alert.alert(
     "You missed your 9:30 lecture! Consider setting an alarm next time dummy."
   );
+  const route = useRoute();
+  const classList = route.params.classList;
   const [attendanceRate, setAttendanceRate] = useState(0);
   const [onTimeRate, setOnTimeRate] = useState(0);
   const [tuitionLost, setTuitionLost] = useState(0);
   const [nextClass, setNextClass] = useState({});
+  Alert.alert(classList[0]);
+  function sendData() {
+    const inputData = {}; // get user's input data
+
+    fetch("http://localhost:5000/process_data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(inputData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Data received from the server:", data);
+      });
+  }
 
   React.useEffect(() => {
     fetch("http://localhost:5000/get_data")

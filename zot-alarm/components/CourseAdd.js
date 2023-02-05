@@ -55,7 +55,7 @@ export default function CourseAdd({ navigation }) {
           setCourseCode("");
         }}
       >
-        <Text style={styles.add_new_class_text}>Add New Class</Text>
+        <Text style={styles.add_new_class_text}>Submit and add new class</Text>
       </Pressable>
       <Pressable
         title="submit-btn"
@@ -69,13 +69,13 @@ export default function CourseAdd({ navigation }) {
             class_info.courseCode = courseCode;
             class_info.courseNumber = courseNumber;
             setClassList([...classList, class_info]);
-            navigation.navigate("Homepage");
+            navigation.navigate("Homepage", { classList });
           } else {
             Alert.alert("Please fill out all the fields.");
           }
         }}
       >
-        <Text style={styles.submit_text}>Submit</Text>
+        <Text style={styles.submit_text}>Submit added classes</Text>
       </Pressable>
       <StatusBar style="auto" />
     </View>

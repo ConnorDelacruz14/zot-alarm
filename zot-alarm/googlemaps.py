@@ -21,8 +21,7 @@ store_dictionary = {"APL" : "Air Pollution Labs", "ALH": "Aldrich Hall", "ACRC":
         "ASIANAM" : "Asian American Studies", "ASUCI" : "Associated Students of UCI", "BLI" : "Beckman Laser Institute", "BH" : "Berk Hall Nursing Science", "BS3" : "Biological Sciences 3", "BME" : "Biomedical Engineering", \
             "BRL" : "Bonney Research Laboratory", "Calit2" : "325 Engineering Quad", "CHP" : "Caampuswide Honors Program", "CNLM" : "Center for the Neurobiology of Learning and Memory", \
                 "CBEMS" : "Chemical Engineering & Materials Science", "CHEM" : "Chemistry", "CHC/LAT" : "383 Social Science Tower", "CTT" : "Claire Trevor Theatre", "CLASSIC" : "400 Murray Krieger Hall", "COGS": "Cognitive Sciences", "COM LIT" : "Comparative Literature", "CAC" : "Contempory Arts Center", "DCE" : "510 E Peltason Dr", \
-                    "CRM/LAW" : "2340 Social Ecology 2", "CCC" : "Cross Cultural Center", "DANCE" : "301 Mesa Arts Building", "DEV BIO" : "2212 Biological Sciences 3", "DSC" :} #hicf
-
+                    "CRM/LAW" : "2340 Social Ecology 2", "CCC" : "Cross Cultural Center", "DANCE" : "301 Mesa Arts Building", "DEV BIO" : "2212 Biological Sciences 3"}
 #d
 
 
