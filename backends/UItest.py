@@ -1,3 +1,4 @@
+
 from apirequests import *
 from datetime import datetime, timedelta
 import math
@@ -166,5 +167,3 @@ def tuition_loss_amount(total_units_applied, missed_class_units, missed_minutes,
     return "Total Tuition Loss: $" + str(math.ceil(missed_cost))
 
 
-#Story of Rayyaan
-#print(tuition_loss_amount(16, 4, 80, 5250, "winter"))
