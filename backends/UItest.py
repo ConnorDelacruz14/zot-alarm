@@ -60,9 +60,6 @@ def add_courses():
         try:
             user_dep = input("What is your department: ").upper()
             print(get_all_courses()[user_dep])
-        user_dep = input("What is your department: ").upper()
-        print(get_all_courses()[user_dep])
-
 
             user_cdnum = input("What is your course number: ")
             all_sections = get_sections(current_term, current_quarter, user_dep, user_cdnum)
