@@ -1,5 +1,7 @@
 # Zot Alarm!
 
+!https://github.com/ConnorDelacruz14/zot-alarm/blob/main/zot-alarm/components/logo.png
+
 Missing Class sucks. Let's make it fun!
 
 We all miss class sometimes. But what we don't realize is how much it adds up.
