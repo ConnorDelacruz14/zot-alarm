@@ -1,10 +1,12 @@
-import { View, Text, Alert } from "react-native";
+import { View, Alert } from "react-native";
 import React from "react";
-import { Item } from "./Homepage";
+import { Item } from "./Items";
 
 export default function Friends() {
   let no_friends = true;
-  Alert.alert("You have no friends! Add some later");
+  if (no_friends) {
+    Alert.alert("You have no friends! Add some later");
+  }
   return (
     <View>
       <Item

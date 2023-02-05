@@ -1,24 +1,8 @@
-import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { Component } from "react";
-import Friends from "./Friends";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import React from "react";
 import Alarms from "./Alarms";
 import Graphs from "./Graphs";
-
-export class Item extends Component {
-  render() {
-    return (
-      <Pressable style={this.props.style}>
-        <Text style={{ textAlign: "center" }}>{this.props.title}</Text>
-      </Pressable>
-    );
-  }
-}
-
-class SmallItem extends Item {
-  render() {
-    return <Item title={this.props.title} style={this.props.style}></Item>;
-  }
-}
+import { Item, SmallItem } from "./Items";
 
 export default function Homepage({ navigation }) {
   let attendance_rate = 95;
