@@ -1,5 +1,6 @@
 # Zot Alarm!
 
+Missing Class sucks. Let's make it fun!
 
 Zot Alarm is the new and highly innovative social media app at UCI! 
 
