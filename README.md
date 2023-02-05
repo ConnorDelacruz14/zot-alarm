@@ -1,6 +1,5 @@
 # Zot Alarm!
-
-![download-removebg-preview](https://user-images.githubusercontent.com/63576585/216832773-0a9f2cdd-6c1c-4ad3-85ab-113c58027893.jpg)
+![logo](https://user-images.githubusercontent.com/63576585/216832969-94d24942-e016-4e5a-9b09-9b2227abb90d.jpg)
 
 Missing Class sucks. Let's make it fun!
 
