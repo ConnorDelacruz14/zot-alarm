@@ -16,7 +16,7 @@ def get_all_courses():
     return all_departments_info
 
 def get_sections(term, quarter, department, number):
-    if type(int(term)) is int:
+    try:
         quarter = quarter.upper()
         department = department.upper()
         if department == "CRM/LAW":
@@ -30,12 +30,13 @@ def get_sections(term, quarter, department, number):
         
         return schedule_dict['schools'][0]['departments'][0]['courses'][0]['sections']
     else:
-        raise Exception("No Specified Course Found")
+        raise Exception("Nonexistent Course")
 
 def get_meeting_info(sections_list, section_code):
     for section in sections_list:
         if section['sectionCode'] == str(section_code):
             return (section['instructors'], section['meetings'], section['finalExam'])
+
 # for key, value in all_departments_info.items():
 #     print(key, value)
 
