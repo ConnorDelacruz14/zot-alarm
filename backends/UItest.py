@@ -1,8 +1,6 @@
 from apirequests import *
 from datetime import datetime, timedelta
 
-from datetime import datetime, timedelta
-
 def check_conflict(schedule):
     for i in range(len(schedule) - 1):
         for j in range(i + 1, len(schedule)):
@@ -102,11 +100,3 @@ def find_next_class(schedule):
                 return f"Your next class is {course['course']} in {course['bldg']} building starting at {start}."
 
     return "You do not have any classes today."
-
-
-if __name__ == "__main__":
-    print(get_all_courses().keys())
-    all_courses = add_courses()
-
-    print(all_courses)
-    print(find_next_class(all_courses))
