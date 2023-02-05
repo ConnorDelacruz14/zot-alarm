@@ -22,6 +22,7 @@ def check_conflict(schedule):
                     if end2 - start2 <= 2:
                         end2 += 12
 
+
                     if start1 < end2 and end1 > start2:
                         return True
             else:
