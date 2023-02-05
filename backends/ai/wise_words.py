@@ -1,23 +1,23 @@
 import os
 import openai
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 prompt = input("Human: ")
 
 response = openai.Completion.create(
-    model="text-davinci-003",
+    model="text-davinci-001",
     prompt=prompt,
     temperature=0.6
 )
 
-# print("Wise words:", )
+print("Wise words:", )
 # response = openai.Image.create(
-#   prompt="an inspirational person",
+#   prompt=prompt,
 #   n=1,
-#   size="1024x1024"
+#   size="512x512"
 # )
 # image_url = response['data'][0]['url']
 # print(image_url)
 
-print("AI:", dict(response)["choices"][0]["text"].replace("\n", ""))
+#print("AI:", dict(response)["choices"][0]["text"].replace("\n", ""))
