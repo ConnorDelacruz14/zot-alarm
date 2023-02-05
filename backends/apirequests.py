@@ -41,7 +41,7 @@ def get_meeting_info(sections_list, section_code):
 
 #print(get_schedule(2023,"WINTER", "I&C SCI", "45C")['schools'][0]['departments'][0]['courses'][0]['sections'][0]['sectionCode'])
 
-# print(get_meeting_info(get_sections(2023, "Winter", "STATS", 67), 37170))
+
 
 # class_info = get_schedules(2023, "Winter", "STATS", "67")
 # print(get_meeting_info(get_sections(2023, "Winter", "STATS", 67), 37200))
