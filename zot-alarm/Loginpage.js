@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import Homepage from "./Homepage";
 import {
-  Alert,
   Image,
   Pressable,
   StyleSheet,
@@ -45,6 +44,7 @@ export default function Loginpage({ navigation }) {
           if (email != "" && password != "") {
             login_info.email = email;
             login_info.password = password;
+            navigation.navigate(Homepage);
           }
         }}
       >

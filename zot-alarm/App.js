@@ -10,7 +10,13 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Zot Alarm!">
         <Stack.Screen name="Zot Alarm!" component={Loginpage} />
-        <Stack.Screen name="Home" component={Homepage} />
+        <Stack.Screen
+          name="Homepage"
+          component={Homepage}
+          options={() => ({
+            // headerBackVisible: false,
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
