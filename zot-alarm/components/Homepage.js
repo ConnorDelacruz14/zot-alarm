@@ -1,14 +1,30 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import Friends from "./Friends";
 import Alarms from "./Alarms";
 import Graphs from "./Graphs";
 import { Item, SmallItem } from "./Items";
+import { useState } from "react";
 
 export default function Homepage({ navigation }) {
-  let attendance_rate = 95;
-  let on_time_rate = 87;
-  let tuition_lost = "487";
-  let next_class = {};
+  const [attendanceRate, setAttendanceRate] = useState(0);
+  const [onTimeRate, setOnTimeRate] = useState(0);
+  const [tuitionLost, setTuitionLost] = useState(0);
+  const [nextClass, setNextClass] = useState({});
+
+  React.useEffect(() => {
+    fetch("http://localhost:5000/get_data")
+      .then((response) => response.json())
+      .then((data) => {
+        setAttendanceRate(data.attendance_rate);
+        setOnTimeRate(data.on_time_rate);
+        setTuitionLost(data.tuition_lost);
+        setNextClass(data.next_class);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   return (
     <View style={styles.app_container}>
       <Item title="Today's Most Missed Classes" style={styles.item}></Item>
@@ -22,10 +38,10 @@ export default function Homepage({ navigation }) {
       </View>
       <View style={{ display: "flex", flexDirection: "row" }}>
         <Text style={styles.attendance_rate}>
-          {attendance_rate}% Attendance Rate
+          {attendanceRate}% Attendance Rate
         </Text>
         <Text style={styles.attendance_rate}>
-          {on_time_rate}
+          {onTimeRate}
           {"%                On-time Rate "}
         </Text>
       </View>

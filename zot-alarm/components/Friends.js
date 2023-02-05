@@ -1,4 +1,4 @@
-import { View, Alert } from "react-native";
+import { View, Text, Alert } from "react-native";
 import React from "react";
 import { Item } from "./Items";
 

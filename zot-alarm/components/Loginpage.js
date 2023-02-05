@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
+import Homepage from "./Homepage";
 import {
   Image,
   Pressable,
