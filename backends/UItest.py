@@ -12,8 +12,8 @@ for section in all_sections:
     print(section['sectionCode'], end=" ")
 print()
 
-meeting_info = get_meeting_info(all_sections, user_section)
 user_section = int(input("What is your section code: "))
+meeting_info = get_meeting_info(all_sections, user_section)
 if len(meeting_info[0]) > 1:    
     print("Your instructors are ", end = "")
 else:
