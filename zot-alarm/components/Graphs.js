@@ -1,10 +1,12 @@
-import { View, Text } from "react-native";
+import { Image, View, ScrollView } from "react-native";
 import React from "react";
 
 export default function Graphs() {
   return (
     <View>
-      <Text>Graphs</Text>
+      <ScrollView>
+        <Image source={require("./chart2.png")} style={{ width: 410 }}></Image>
+      </ScrollView>
     </View>
   );
 }
