@@ -25,7 +25,7 @@ def get_sections(term, quarter, department, number):
             department = "I%26C SCI"
         schedule = requests.get(f"https://api.peterportal.org/rest/v0/schedule/soc?term={term}%20{quarter}&department={department}&courseNumber={number}")
         schedule_dict = dict(schedule.json())
-        # meetings = schedule_dict['schools'][0]['departments'][0]['courses'][0]['sections'][0]['meetings'][0]
+        # meetings = schedule_dict['schoolsx'][0]['departments'][0]['courses'][0]['sections'][0]['meetings'][0]
         # section_code = schedule_dict['schools'][0]['departments'][0]['courses'][0]['sections'][0]['sectionCode']
         
         return schedule_dict['schools'][0]['departments'][0]['courses'][0]['sections']

@@ -33,6 +33,9 @@
       "eas": {
         "projectId": "11cea4d7-e7c4-4383-819c-03783f0beb2d"
       }
-    }
+    },
+    "plugins": [
+      "react-native-background-geolocation"
+    ]
   }
 }

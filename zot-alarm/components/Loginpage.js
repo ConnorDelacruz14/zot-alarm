@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   View,
+  Alert,
 } from "react-native";
 
 export default function Loginpage({ navigation }) {
@@ -42,9 +43,16 @@ export default function Loginpage({ navigation }) {
         style={styles.login_btn}
         onPress={() => {
           if (email != "" && password != "") {
-            login_info.email = email;
-            login_info.password = password;
-            navigation.navigate(Homepage);
+            if (!email.includes("@uci.edu")) {
+              Alert.alert("Please enter a valid UCI email.");
+            } else {
+              login_info.email = email;
+              login_info.password = password;
+              navigation.navigate(Homepage);
+              Alert.alert(
+                "You missed your 9:30 lecture! Consider setting an alarm next time dummy."
+              );
+            }
           }
         }}
       >
@@ -57,7 +65,7 @@ export default function Loginpage({ navigation }) {
 
 const styles = StyleSheet.create({
   logo: {
-    marginTop: -200,
+    marginTop: -240,
   },
 
   container: {
