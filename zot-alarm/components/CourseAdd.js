@@ -50,6 +50,10 @@ export default function CourseAdd({ navigation }) {
         title="add-new-class-btn"
         style={styles.add_new_class_btn}
         onPress={() => {
+          class_info.departmentName = departmentName;
+          class_info.courseCode = courseCode;
+          class_info.courseNumber = courseNumber;
+          setClassList([...classList, class_info]);
           setDepartmentName("");
           setCourseNumber("");
           setCourseCode("");
@@ -69,6 +73,7 @@ export default function CourseAdd({ navigation }) {
             class_info.courseCode = courseCode;
             class_info.courseNumber = courseNumber;
             setClassList([...classList, class_info]);
+            console.log(classList);
             navigation.navigate("Homepage", { classList });
           } else {
             Alert.alert("Please fill out all the fields.");
