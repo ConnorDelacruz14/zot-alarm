@@ -5,11 +5,11 @@ from UItest import *
 
 from flask import Flask, request
 import json
-from UItest import *
+
 
 app = Flask(__name__)
 
-@app.route("/process_data", methods=["POST"])
+@app.route("/query_example", methods=["POST"])
 
 def process_data():
     input_data = request.get_json()
@@ -83,15 +83,6 @@ def process_data():
                 quit()
         else:
             print("Failed to retrieve location.")
-
-
-
-
-
-
-
-
-
 
 
     #processed_data = { ... }
