@@ -8,9 +8,6 @@ import { useState } from "react";
 import { useRoute } from "@react-navigation/native";
 
 export default function Homepage({ navigation }) {
-  Alert.alert(
-    "You missed your 9:30 lecture! Consider setting an alarm next time dummy."
-  );
   const route = useRoute();
   const classList = route.params.classList;
   const [attendanceRate, setAttendanceRate] = useState(0);
@@ -18,9 +15,8 @@ export default function Homepage({ navigation }) {
   const [tuitionLost, setTuitionLost] = useState(0);
   const [nextClass, setNextClass] = useState({});
 
-  /*
   React.useEffect(() => {
-    fetch("http://localhost:5000/get_data")
+    fetch("")
       .then((response) => response.json())
       .then((data) => {
         setAttendanceRate(data.attendance_rate);
@@ -31,7 +27,7 @@ export default function Homepage({ navigation }) {
       .catch((error) => {
         console.error(error);
       });
-  }, []); */
+  }, []);
 
   return (
     <View style={styles.app_container}>
