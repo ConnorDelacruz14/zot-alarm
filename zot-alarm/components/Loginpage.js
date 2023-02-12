@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
 
   title_text: {
     fontSize: 60,
+    fontFamily: "Comfortaa-Regular",
     marginTop: 20,
     marginBottom: 40,
   },
