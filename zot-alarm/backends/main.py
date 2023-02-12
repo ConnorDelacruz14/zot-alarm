@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from UItest import *
+from flask_connect import *
 
 #Ali's newest
 
@@ -22,3 +23,4 @@ if __name__ == "__main__":
     user_courses = add_courses(user_courses, "I&C SCI", "6D", 35531)
     print(user_courses)
     print(find_next_class(user_courses))
+    app.run()
