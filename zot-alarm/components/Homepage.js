@@ -1,29 +1,27 @@
-import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Friends from "./Friends";
 import Alarms from "./Alarms";
 import Graphs from "./Graphs";
 import { Item, SmallItem } from "./Items";
-import { useState } from "react";
-import { useRoute } from "@react-navigation/native";
+import { useState, useEffect } from "react";
 
 export default function Homepage({ navigation }) {
-  const route = useRoute();
-  const classList = route.params.classList;
   const [attendanceRate, setAttendanceRate] = useState(0);
   const [onTimeRate, setOnTimeRate] = useState(0);
   const [tuitionLost, setTuitionLost] = useState(0);
-  const [nextClass, setNextClass] = useState({});
+  const [nextClass, setNextClass] = useState("");
 
-  React.useEffect(() => {
-    fetch("")
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/process_data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(),
+    })
       .then((response) => response.json())
-      .then((data) => {
-        setAttendanceRate(data.attendance_rate);
-        setOnTimeRate(data.on_time_rate);
-        setTuitionLost(data.tuition_lost);
-        setNextClass(data.next_class);
-      })
+      .then((data) => {})
       .catch((error) => {
         console.error(error);
       });

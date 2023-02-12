@@ -1,18 +1,20 @@
-# from flask import Flask, request
-# import json
-# from UItest import *
+from flask import Flask, request
+import json
+from UItest import *
+from flask_cors import CORS
 
-# app = Flask(__name__)
+app = Flask(__name__)
+CORS(app)
 
-# @app.route("/process_data", methods=["POST"])
-# def process_data():
-#   global input_data
-#   input_data = request.get_json()
+@app.route("/process_data", methods=["POST"])
+def process_data():
+  global input_data
+  input_data = request.get_json()
 
-#   # Perform processing on input_data
+  # Perform processing on input_data
   
-#   processed_data = { ... }
-#   return json.dumps(processed_data)
+  processed_data = {}
+  return json.dumps(processed_data)
 
-# if __name__ == "__main__":
-#   app.run()
+if __name__ == "__main__":
+  app.run()
