@@ -4,7 +4,7 @@ import Friends from "./Friends";
 import Alarms from "./Alarms";
 import Graphs from "./Graphs";
 import { Item, SmallItem } from "./Items";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Homepage({ navigation }) {
   const [attendanceRate, setAttendanceRate] = useState(0);
@@ -12,20 +12,27 @@ export default function Homepage({ navigation }) {
   const [tuitionLost, setTuitionLost] = useState(0);
   const [nextClass, setNextClass] = useState("");
 
-  useEffect(() => {
+  const handleSendData = () => {
+    console.log("Connecting...");
     fetch("http://127.0.0.1:5000/process_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(),
+      body: JSON.stringify({ message: "hello" }),
     })
-      .then((response) => response.json())
-      .then((data) => {})
+      .then((response) => {
+        console.log("Connected!");
+      })
+      .then((data) => {
+        console.log(data);
+      })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  };
+
+  handleSendData();
 
   return (
     <View style={styles.app_container}>
