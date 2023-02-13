@@ -60,11 +60,13 @@ export default class CourseAdd extends Component {
           title="add-new-class-btn"
           style={styles.add_new_class_btn}
           onPress={() => {
-            this.classInfo.departmentName = this.state.departmentName;
-            this.classInfo.courseCode = this.state.courseCode;
-            this.classInfo.courseNumber = this.state.courseNumber;
+            const classInfo = {
+              departmentName: this.state.departmentName,
+              courseCode: this.state.courseCode,
+              courseNumber: this.state.courseNumber,
+            };
             this.setState({
-              class_list: [...this.state.class_list, this.classInfo],
+              class_list: [...this.state.class_list, classInfo],
               departmentName: "",
               courseNumber: "",
               courseCode: "",

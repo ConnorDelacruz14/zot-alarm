@@ -40,7 +40,6 @@ export default class Homepage extends Component {
   componentDidMount() {
     const class_list = this.props.route.params.class_list;
     const login_info = this.props.route.params.login_info;
-
     let user_data = {
       login_info: login_info,
       class_list: class_list,
