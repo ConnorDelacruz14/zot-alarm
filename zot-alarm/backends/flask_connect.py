@@ -18,6 +18,10 @@ def process_data():
   print("Current position: ", user_data["location"])
   printData(user_data["class_list"])
 
+  #TODO: Process ^^^^^
+
+  #TODO: Return -> Tution, other stats
+
   return user_data
 
 if __name__ == "__main__":
