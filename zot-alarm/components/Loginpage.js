@@ -9,7 +9,6 @@ import {
   View,
   Alert,
 } from "react-native";
-import CourseAdd from "./CourseAdd";
 
 export default function Loginpage({ navigation }) {
   const [email, setEmail] = useState("");
@@ -21,7 +20,7 @@ export default function Loginpage({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={require("./logo.jpg")}></Image>
+      <Image style={styles.logo} source={require("./logo.png")}></Image>
       <Text style={styles.title_text}>Zot Alarm!</Text>
       <View>
         <TextInput
@@ -48,7 +47,7 @@ export default function Loginpage({ navigation }) {
             } else {
               login_info.email = email;
               login_info.password = password;
-              navigation.navigate(CourseAdd);
+              navigation.navigate("CourseAdd", { login_info });
             }
           }
         }}

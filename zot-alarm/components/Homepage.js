@@ -1,10 +1,12 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
 import Friends from "./Friends";
 import Alarms from "./Alarms";
 import Graphs from "./Graphs";
 import { Item, SmallItem } from "./Items";
-export default class Homepage extends React.Component {
+import React, { Component } from "react";
+import Geolocation from "react-native-geolocation-service";
+
+export default class Homepage extends Component {
   constructor(props) {
     super(props);
 
@@ -16,17 +18,16 @@ export default class Homepage extends React.Component {
     };
   }
 
-  handleSendData = (classList) => {
-    console.log("Connecting...");
+  handleSendData = (user_data) => {
     fetch("http://127.0.0.1:5000/process_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(classList),
+      body: JSON.stringify(user_data),
     })
       .then((response) => {
-        console.log("Connected!", "Sending data to backend...");
+        return response.json();
       })
       .then((data) => {
         console.log("Data: ", data);
@@ -37,9 +38,31 @@ export default class Homepage extends React.Component {
   };
 
   componentDidMount() {
-    const classList = this.props.route.params.classList;
-    console.log("Classes: ", classList);
-    this.handleSendData(classList);
+    const class_list = this.props.route.params.class_list;
+    const login_info = this.props.route.params.login_info;
+
+    let user_data = {
+      login_info: login_info,
+      class_list: class_list,
+    };
+
+    Geolocation.getCurrentPosition(
+      (position) => {
+        user_data = {
+          ...user_data,
+          location: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          },
+        };
+        this.handleSendData(user_data);
+      },
+      (error) => {
+        // See error code charts below.
+        console.log(error.code, error.message);
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    );
   }
 
   render() {
