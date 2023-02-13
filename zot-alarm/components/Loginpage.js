@@ -62,6 +62,8 @@ export default function Loginpage({ navigation }) {
 const styles = StyleSheet.create({
   logo: {
     marginTop: -240,
+    width: 400,
+    height: 200,
   },
 
   container: {
