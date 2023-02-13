@@ -4,57 +4,66 @@ import Friends from "./Friends";
 import Alarms from "./Alarms";
 import Graphs from "./Graphs";
 import { Item, SmallItem } from "./Items";
-import { useState } from "react";
+export default class Homepage extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default function Homepage({ navigation }) {
-  const [attendanceRate, setAttendanceRate] = useState(0);
-  const [onTimeRate, setOnTimeRate] = useState(0);
-  const [tuitionLost, setTuitionLost] = useState(0);
-  const [nextClass, setNextClass] = useState("");
+    this.state = {
+      attendanceRate: 0,
+      onTimeRate: 0,
+      tuitionLost: 0,
+      nextClass: "",
+    };
+  }
 
-  const handleSendData = () => {
+  handleSendData = (classList) => {
     console.log("Connecting...");
     fetch("http://127.0.0.1:5000/process_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message: "hello" }),
+      body: JSON.stringify(classList),
     })
       .then((response) => {
-        console.log("Connected!");
+        console.log("Connected!", "Sending data to backend...");
       })
       .then((data) => {
-        console.log(data);
+        console.log("Data: ", data);
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-  handleSendData();
+  componentDidMount() {
+    const classList = this.props.route.params.classList;
+    console.log("Classes: ", classList);
+    this.handleSendData(classList);
+  }
 
-  return (
-    <View style={styles.app_container}>
-      <Item title="Today's Most Missed Classes" style={styles.item}></Item>
-      <Item title="Your Missed Classes" style={styles.item}></Item>
-      <View style={{ display: "flex", flexDirection: "row" }}>
-        <SmallItem
-          title="Total Tuition Lost"
-          style={styles.small_item}
-        ></SmallItem>
-        <SmallItem title="Next Class" style={styles.small_item}></SmallItem>
+  render() {
+    const { navigation } = this.props;
+
+    return (
+      <View style={styles.app_container}>
+        <Item title="Today's Most Missed Classes" style={styles.item}></Item>
+        <Item title="Your Missed Classes" style={styles.item}></Item>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <SmallItem
+            title="Total Tuition Lost"
+            style={styles.small_item}
+          ></SmallItem>
+          <SmallItem title="Next Class" style={styles.small_item}></SmallItem>
+        </View>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Text style={styles.attendance_rate}>97% Attendance Rate</Text>
+          <Text style={styles.attendance_rate}>82% On-time Rate</Text>
+        </View>
+        <Taskbar navigation={navigation}></Taskbar>
       </View>
-      <View style={{ display: "flex", flexDirection: "row" }}>
-        <Text style={styles.attendance_rate}>97% Attendance Rate</Text>
-        <Text style={styles.attendance_rate}>
-          {82}
-          {"%                 On-time Rate "}
-        </Text>
-      </View>
-      <Taskbar navigation={navigation}></Taskbar>
-    </View>
-  );
+    );
+  }
 }
 
 const Taskbar = ({ navigation }) => {

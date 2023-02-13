@@ -65,22 +65,18 @@ export default function CourseAdd({ navigation }) {
         title="submit-btn"
         style={styles.submit_btn}
         onPress={() => {
-          if (
-            (departmentName != "" && courseCode != "" && courseNumber != "") ||
-            classList.length != 0
-          ) {
+          if (classList.length != 0) {
             class_info.departmentName = departmentName;
             class_info.courseCode = courseCode;
             class_info.courseNumber = courseNumber;
             setClassList([...classList, class_info]);
-            console.log(classList);
             navigation.navigate("Homepage", { classList });
           } else {
-            Alert.alert("Please fill out all the fields.");
+            Alert.alert("Please submit at least one class.");
           }
         }}
       >
-        <Text style={styles.submit_text}>Submit added classes</Text>
+        <Text style={styles.submit_text}>Continue</Text>
       </Pressable>
       <StatusBar style="auto" />
     </View>
