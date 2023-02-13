@@ -66,10 +66,6 @@ export default function CourseAdd({ navigation }) {
         style={styles.submit_btn}
         onPress={() => {
           if (classList.length != 0) {
-            class_info.departmentName = departmentName;
-            class_info.courseCode = courseCode;
-            class_info.courseNumber = courseNumber;
-            setClassList([...classList, class_info]);
             navigation.navigate("Homepage", { classList });
           } else {
             Alert.alert("Please submit at least one class.");
