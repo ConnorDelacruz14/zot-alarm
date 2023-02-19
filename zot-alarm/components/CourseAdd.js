@@ -54,6 +54,7 @@ export default class CourseAdd extends Component {
             style={styles.input}
             value={this.state.courseCode}
             onChangeText={(text) => this.setState({ courseCode: text })}
+            maxLength={5}
           ></TextInput>
         </View>
         <Pressable
