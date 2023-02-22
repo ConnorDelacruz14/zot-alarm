@@ -1,6 +1,7 @@
 from flask import Flask, request
 from UItest import *
 from flask_cors import CORS
+import database_connect
 
 app = Flask(__name__)
 CORS(app)
@@ -10,11 +11,8 @@ def printData(class_list):
   for _class in class_list:
     print(_class)
 
-def process_login(login_info):
-  # TODO: Check if user is logging in for the first time
-  first_login = True
-  
-  return {"first_login": first_login} 
+def process_login(login_info):  
+  return {"first_login": database_connect.CheckFirstLogin(login_info["email"], login_info["password"])} 
 
 @app.route("/process_data", methods=["POST"])
 def process_data():
@@ -24,12 +22,8 @@ def process_data():
   if len(user_data) == 2:
       print(user_data)
       return process_login(user_data)
-
-  print("Login info: ", user_data["login_info"])
-  print("Current position: ", user_data["location"])
-  printData(user_data["class_list"])
-
-  #TODO: Process ^^^^^
+  else:
+      pass
 
   #TODO: Return -> Tution, other stats
   return user_data

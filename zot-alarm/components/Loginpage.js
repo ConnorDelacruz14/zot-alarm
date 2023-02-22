@@ -58,7 +58,6 @@ export default function Loginpage({ navigation }) {
                   return response.json();
                 })
                 .then((data) => {
-                  console.log("Data: ", data);
                   if (data["first_login"] == true) {
                     navigation.navigate("CourseAdd", { login_info });
                   } else {
