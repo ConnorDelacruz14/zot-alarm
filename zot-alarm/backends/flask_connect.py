@@ -1,5 +1,4 @@
 from flask import Flask, request
-import json
 from UItest import *
 from flask_cors import CORS
 
