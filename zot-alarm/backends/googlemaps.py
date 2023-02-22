@@ -1,6 +1,6 @@
 import requests
 from UItest import *
-
+from flask_connect import *
 #################################
 
 from flask import Flask, request
@@ -15,10 +15,9 @@ def process_data():
     input_data = request.get_json()
     courses = add_courses(input_data)
 
-  # Perform processing on input_data
-    api_key = "AIzaSyDnduWKdpEGqDnQ1NZAzaZh3wnVGeZRfG4"
-#ffdsa
 
+#ffdsa
+def checkCoordinates(x: int, y: int, courses_list: list, department: str, code_num: str, section_code: int) -> bool:
     store_dictionary = {"APL" : "Air Pollution Labs", "ALH": "Aldrich Hall", "ACRC": "Anteater Community Resource Center", "AIRB": "Anteater Instruction and Research Building", \
         "ALP" : "Anteater Learning Pavilion", "ART" : "Art Studio", "ACT" : "Art, Culture and Technology", "AITR" : "Arts Instruction and Technology Resource Center", \
         "AIRB" : "Anteater Instruction and Researach Building", "ARC" : "Anteater Recreation Center", "ANTHRO": "Anthropology", "ART" : "Art", "ART HIS" : "Art History", \
@@ -49,14 +48,16 @@ def process_data():
         "SST": "Social Science Tower", "SSTR": "Social Science Trailer", "SOCIOL": "4215 Social Science Plaza B", "SPANISH&PORTUG": "Spanish and Portugal", "SPH": "Sprague Hall", \
         "STATS": "Donald Bren Hall", "SH": "Steinhaus Hall", "SC": "Student Center", "SHC": "Student Health Center", "SS1": "Student Services 1", "STU4": "Studio 4", \
         "UNEX": "231 Social Sciences Quad", "PSTU": "William J. Gillespie Performance Studios", "WSH": "Winifred Smith Hall", "WOMN ST": "Women's Studies"}
+      # Perform processing on input_data
+    
+    api_key = "AIzaSyDnduWKdpEGqDnQ1NZAzaZh3wnVGeZRfG4"
 
 
-
-    courses = add_courses([], input_data)
-    check = courses["bldg"].split(" ")
+    courses = add_courses(courses_list, department, code_num, section_code)
+    check = courses[0]["bldg"].split(" ")
     official = check[0]
     address = store_dictionary[official]
-    address += "Irvine, CA"
+    address += ", Irvine, CA"
 
 
     url = f"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={api_key}"
@@ -65,7 +66,7 @@ def process_data():
 
 
     if response.status_code == 200:
-        x, y = 33.649349, -117.84238
+        # x, y = 33.649349, -117.84238
         response_json = response.json()
         northeast_lat_upper = response_json["results"][0]["geometry"]["bounds"]["northeast"]["lat"]
         southwest_lat_lower = response_json["results"][0]["geometry"]["bounds"]["southwest"]["lat"]
@@ -74,19 +75,23 @@ def process_data():
         location = response_json["results"][0]["geometry"]["location"]
         latitude = location["lat"]
         longitude = location["lng"]
-        print(southwest_lat_lower, northeast_lat_upper, southwest_long_lower, northeast_long_upper)
+        print(southwest_long_lower, northeast_long_upper, southwest_lat_lower, northeast_lat_upper)
         xmin, xmax, ymin, ymax = southwest_long_lower, northeast_long_upper, southwest_lat_lower, northeast_lat_upper
-        if xmin <= x <= xmax and ymin <= y <= ymax:
-            if is_attended():
+        if (xmin <= x <= xmax) and (ymin <= y <= ymax):
+            if is_attended(courses):
                 print(find_next_class())
-            else:
-                quit()
+                print("LOCATION IN BOUNDS")
+                return True
+            # else:
+            #     quit()
         else:
             print("Failed to retrieve location.")
+            return False
 
 
-    #processed_data = { ... }
-    return# json.dumps(processed_data)
 
-if __name__ == "__main__":
-  app.run()
+
+    return
+
+# if __name__ == "__main__":
+#   app.run()

@@ -161,9 +161,8 @@ def is_attended(schedule: list) -> bool:
     current_day = now.strftime("%A")
     current_time = now.strftime("%I:%M%p")
 
-
     for course in schedule:
-        if course['days'].find(current_day[:2]) != -1:
+        if (course['days']).find(current_day[:2]) != -1:
             start, end = map(str.strip, course['time'].split("-"))
             start_time = datetime.strptime(start, "%I:%M%p")
             end_time = datetime.strptime(end, "%I:%M%p")
