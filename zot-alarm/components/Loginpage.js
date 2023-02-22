@@ -47,7 +47,27 @@ export default function Loginpage({ navigation }) {
             } else {
               login_info.email = email;
               login_info.password = password;
-              navigation.navigate("CourseAdd", { login_info });
+              fetch("http://127.0.0.1:5000/process_data", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(login_info),
+              })
+                .then((response) => {
+                  return response.json();
+                })
+                .then((data) => {
+                  console.log("Data: ", data);
+                  if (data["first_login"] == true) {
+                    navigation.navigate("CourseAdd", { login_info });
+                  } else {
+                    navigation.navigate("Homepage", { data });
+                  }
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
             }
           }
         }}
