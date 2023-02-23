@@ -6,13 +6,13 @@ import database_connect
 app = Flask(__name__)
 CORS(app)
 
-def printData(class_list):
+def printData(class_list) -> None:
   print("Number of classes: ", len(class_list))
   for _class in class_list:
     print(_class)
 
 @app.route("/process_data", methods=["POST"])
-def process_data():
+def process_data() -> dict:
   user_data = request.get_json()
 
   # Check if data is for login
@@ -23,7 +23,7 @@ def process_data():
       elif database_connect.FirstLogin(user_data["email"], user_data["password"]):
           return {"status": "new login"} 
       else:
-          return {"status": "incorrect login"}
+          return {"status": "incorrect login"}  
 
   return user_data
 

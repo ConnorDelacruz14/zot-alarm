@@ -47,7 +47,7 @@ export default function Loginpage({ navigation }) {
             } else {
               login_info.email = email;
               login_info.password = password;
-              fetch("http://10.8.41.150:5000/process_data", {
+              fetch("http://127.0.0.1:5000/process_data", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

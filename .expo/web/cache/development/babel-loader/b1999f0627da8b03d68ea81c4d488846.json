@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default function Group(_) {\n  return null;\n}","map":{"version":3,"names":["Group","_"],"sources":["../../src/Group.tsx"],"sourcesContent":[null],"mappings":"AAOA,eAAe,SAASA,KAAKA,CAG3BC,CAA6C,EAAE;EAE/C,OAAO,IAAI;AACb"},"metadata":{},"sourceType":"module"}
