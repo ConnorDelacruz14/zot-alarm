@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default function Screen(_) {\n  return null;\n}","map":{"version":3,"names":["Screen","_"],"sources":["../../src/Screen.tsx"],"sourcesContent":[null],"mappings":"AAOA,eAAe,SAASA,MAAMA,CAM5BC,CAAoE,EAAE;EAEtE,OAAO,IAAI;AACb"},"metadata":{},"sourceType":"module"}
