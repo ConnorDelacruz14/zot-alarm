@@ -58,10 +58,13 @@ export default function Loginpage({ navigation }) {
                   return response.json();
                 })
                 .then((data) => {
-                  if (data["first_login"] == true) {
+                  console.log(data);
+                  if (data["status"] == "new login") {
                     navigation.navigate("CourseAdd", { login_info });
-                  } else {
+                  } else if (data["status"] == "correct login") {
                     navigation.navigate("Homepage", { data });
+                  } else {
+                    Alert.alert("Incorrect password for the given email.");
                   }
                 })
                 .catch((error) => {

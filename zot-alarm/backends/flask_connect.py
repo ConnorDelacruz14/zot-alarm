@@ -11,9 +11,6 @@ def printData(class_list):
   for _class in class_list:
     print(_class)
 
-def process_login(login_info):  
-  return {"first_login": database_connect.CheckFirstLogin(login_info["email"], login_info["password"])} 
-
 @app.route("/process_data", methods=["POST"])
 def process_data():
   user_data = request.get_json()
@@ -21,11 +18,13 @@ def process_data():
   # Check if data is for login
   if len(user_data) == 2:
       print(user_data)
-      return process_login(user_data)
-  else:
-      pass
+      if not database_connect.FirstLogin(user_data["email"], user_data["password"]) and database_connect.CorrectLoginInfo(user_data["email"], user_data["password"]):
+          return {"status": "correct login"}
+      elif database_connect.FirstLogin(user_data["email"], user_data["password"]):
+          return {"status": "new login"} 
+      else:
+          return {"status": "incorrect login"}
 
-  #TODO: Return -> Tution, other stats
   return user_data
 
 if __name__ == "__main__":
