@@ -26,6 +26,9 @@ def FirstLogin(email: str, password: str) -> bool:
 
     if connection.fetchone():
         return False
+    
+    connection.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
+    users.commit()
     connection.close()
     return True
 
@@ -43,7 +46,6 @@ def CorrectLoginInfo(email: str, password: str) -> bool:
     if connection.fetchone():
         return True
     return False
-
 
 if __name__ == "__main__":
     print(FirstLogin("test_user1@uci.edu", "password")) # Should be False
