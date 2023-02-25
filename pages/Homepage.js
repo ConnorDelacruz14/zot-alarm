@@ -4,13 +4,15 @@ import Alarms from "./Alarms";
 import Graphs from "./Graphs";
 import { Item, SmallItem } from "./components/Items";
 import React, { Component } from "react";
-//import Geolocation from "react-native-geolocation-service";
+import * as Location from "expo-location";
 
 export default class Homepage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      location: null,
+      errorMsg: null,
       attendanceRate: 0,
       onTimeRate: 0,
       tuitionLost: 0,
@@ -19,7 +21,7 @@ export default class Homepage extends Component {
   }
 
   handleSendData = (user_data) => {
-    fetch("http://127.0.0.1:5000/process_data", {
+    fetch("http://10.8.41.150:5000/process_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,24 +46,6 @@ export default class Homepage extends Component {
       login_info: login_info,
       class_list: class_list,
     };
-
-    //   Geolocation.getCurrentPosition(
-    //     (position) => {
-    //       user_data = {
-    //         ...user_data,
-    //         location: {
-    //           latitude: position.coords.latitude,
-    //           longitude: position.coords.longitude,
-    //         },
-    //       };
-    //       this.handleSendData(user_data);
-    //     },
-    //     (error) => {
-    //       // See error code charts below.
-    //       console.log(error.code, error.message);
-    //     },
-    //     { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-    //   );
   }
 
   render() {

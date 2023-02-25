@@ -14,6 +14,7 @@ export default function Loginpage({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let login_info = {
+    request: "login",
     email: "",
     password: "",
   };
@@ -47,7 +48,7 @@ export default function Loginpage({ navigation }) {
             } else {
               login_info.email = email;
               login_info.password = password;
-              fetch("http://10.8.41.150:5000/process_data", {
+              fetch("http://10.8.23.244:5000/process_data", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -63,7 +64,11 @@ export default function Loginpage({ navigation }) {
                     navigation.navigate("CourseAdd", { login_info });
                   } else if (data["status"] == "correct login") {
                     navigation.navigate("Homepage", { data });
-                  } else {
+                  } else if (data["status"] == "error") {
+                    Alert.alert(
+                      "There was an error logging in. Try again later."
+                    );
+                  } else if (data["status"] == "incorrect login") {
                     Alert.alert("Incorrect password for the given email.");
                   }
                 })

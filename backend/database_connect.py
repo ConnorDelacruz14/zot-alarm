@@ -1,6 +1,6 @@
 import mysql.connector
 
-def AddUser(email: str, password: str, classes: dict) -> None:
+def AddUser(email: str, password: str) -> None:
     users = mysql.connector.connect(
         host="localhost",
         user="root",
@@ -9,10 +9,23 @@ def AddUser(email: str, password: str, classes: dict) -> None:
     )
     connection = users.cursor()
     connection.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
+
     users.commit()
     connection.close()
-    # TODO: add classes 
 
+
+def AddClass(email: str, class_num: int, class_code: int) -> None:
+    users = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="S3RJGY8jfRbow02D%i6U",
+        database="zot_alarm",
+    )
+    connection = users.cursor()
+    connection.execute("INSERT INTO users (class_%s) VALUES (%s) WHERE email = %s", [class_num, class_code, email])
+    users.commit()
+    connection.close()
+    
 
 def FirstLogin(email: str, password: str) -> bool:
     users = mysql.connector.connect(
