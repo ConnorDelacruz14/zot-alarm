@@ -28,6 +28,25 @@ export default class CourseAdd extends Component {
     };
   }
 
+  handleSendData = (user_data) => {
+    fetch("http://10.8.23.244:5000/process_data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user_data),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Course Add:", data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -83,8 +102,13 @@ export default class CourseAdd extends Component {
           style={styles.submit_btn}
           onPress={() => {
             if (this.state.class_list.length !== 0) {
-              this.props.navigation.navigate("Homepage", {
+              this.handleSendData({
+                request: "add_classes",
                 class_list: this.state.class_list,
+                login_info: this.props.route.params.login_info,
+              });
+              this.props.navigation.navigate("Homepage", {
+                request: "load_global",
                 login_info: this.props.route.params.login_info,
               });
             } else {

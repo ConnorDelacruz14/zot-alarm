@@ -22,7 +22,7 @@ def AddClass(email: str, class_num: int, class_code: int) -> None:
         database="zot_alarm",
     )
     connection = users.cursor()
-    connection.execute("INSERT INTO users (class_%s) VALUES (%s) WHERE email = %s", [class_num, class_code, email])
+    connection.execute("UPDATE users SET class_%s = %s WHERE email = %s", [class_num, class_code, email])
     users.commit()
     connection.close()
     

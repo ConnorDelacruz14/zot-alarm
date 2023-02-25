@@ -21,7 +21,7 @@ export default class Homepage extends Component {
   }
 
   handleSendData = (user_data) => {
-    fetch("http://10.8.41.150:5000/process_data", {
+    fetch("http://10.8.23.244:5000/process_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,7 @@ export default class Homepage extends Component {
         return response.json();
       })
       .then((data) => {
-        console.log("Data: ", data);
+        // console.log("Homepage data: ", data);
       })
       .catch((error) => {
         console.error(error);
@@ -40,12 +40,13 @@ export default class Homepage extends Component {
   };
 
   componentDidMount() {
-    const class_list = this.props.route.params.class_list;
     const login_info = this.props.route.params.login_info;
+    const request = this.props.route.params.request;
     let user_data = {
+      request: request,
       login_info: login_info,
-      class_list: class_list,
     };
+    this.handleSendData(user_data);
   }
 
   render() {

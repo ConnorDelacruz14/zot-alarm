@@ -14,7 +14,6 @@ export default function Loginpage({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let login_info = {
-    request: "login",
     email: "",
     password: "",
   };
@@ -53,23 +52,32 @@ export default function Loginpage({ navigation }) {
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify(login_info),
+                body: JSON.stringify({
+                  login_info: login_info,
+                  request: "login",
+                }),
               })
                 .then((response) => {
                   return response.json();
                 })
                 .then((data) => {
                   console.log(data);
-                  if (data["status"] == "new login") {
-                    navigation.navigate("CourseAdd", { login_info });
-                  } else if (data["status"] == "correct login") {
-                    navigation.navigate("Homepage", { data });
+                  if (data["status"] == "new_account") {
+                    navigation.navigate("CourseAdd", {
+                      login_info: login_info,
+                    });
+                  } else if (data["status"] == "correct_login") {
+                    navigation.navigate("Homepage", {
+                      from: "LoginPage",
+                      request: "load_global",
+                      login_info: login_info,
+                    });
+                  } else if (data["status"] == "incorrect_login") {
+                    Alert.alert("Incorrect password for the given email.");
                   } else if (data["status"] == "error") {
                     Alert.alert(
                       "There was an error logging in. Try again later."
                     );
-                  } else if (data["status"] == "incorrect login") {
-                    Alert.alert("Incorrect password for the given email.");
                   }
                 })
                 .catch((error) => {
