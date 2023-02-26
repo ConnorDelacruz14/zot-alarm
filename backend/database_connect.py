@@ -47,18 +47,22 @@ def FirstLogin(email: str, password: str) -> bool:
 
 
 def CorrectLoginInfo(email: str, password: str) -> bool:
+    if GetClassInfo(email, password):
+        return True
+    return False
+
+
+def GetClassInfo(email: str, password: str) -> tuple:
     users = mysql.connector.connect(
         host="localhost",
         user="root",
         password="S3RJGY8jfRbow02D%i6U",
         database="zot_alarm",
     )
-
     connection = users.cursor()
-    connection.execute("SELECT id FROM users WHERE email = %s AND password = %s", (email, password))
-    if connection.fetchone():
-        return True
-    return False
+    connection.execute("SELECT * FROM users WHERE email = %s AND password = %s", (email, password))
+    return (connection.fetchone())
+
 
 if __name__ == "__main__":
     print(FirstLogin("test_user1@uci.edu", "password")) # Should be False

@@ -24,7 +24,9 @@ def process_data() -> dict:
         return login.CreateUser(login_info)
       case "add_classes":
         login.AddAllClasses(login_info["email"], user_data["class_list"])
-  
+      case "load_global":
+        return login.LoadClasses(login_info)
+
   return {}
 
 if __name__ == "__main__":

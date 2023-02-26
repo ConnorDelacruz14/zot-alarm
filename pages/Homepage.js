@@ -32,7 +32,10 @@ export default class Homepage extends Component {
         return response.json();
       })
       .then((data) => {
-        // console.log("Homepage data: ", data);
+        console.log(data);
+        this.state.attendanceRate = data.attendanceRate;
+        this.state.onTimeRate = data.onTimeRate;
+        this.state.tuitionLost = data.tuitionLost;
       })
       .catch((error) => {
         console.error(error);
