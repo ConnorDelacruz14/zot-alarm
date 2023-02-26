@@ -14,7 +14,6 @@ def printData(class_list) -> None:
 @app.route("/process_data", methods=["POST"])
 def process_data() -> dict:
   user_data = request.get_json()
-  print(user_data)
   user_request = user_data["request"]
   login_info = user_data["login_info"]
   match user_request:

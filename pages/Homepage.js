@@ -14,7 +14,7 @@ export default class Homepage extends Component {
       location: null,
       errorMsg: null,
       attendanceRate: 0,
-      onTimeRate: 0,
+      tardyRate: 0,
       tuitionLost: 0,
       nextClass: "",
     };
@@ -32,10 +32,11 @@ export default class Homepage extends Component {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        this.state.attendanceRate = data.attendanceRate;
-        this.state.onTimeRate = data.onTimeRate;
-        this.state.tuitionLost = data.tuitionLost;
+        this.setState({
+          attendanceRate: data.attendance_rate * 100,
+          tardyRate: data.tardy_rate * 100,
+          tuitionLost: 122 * (data.total_classes - data.classes_attended),
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -67,8 +68,12 @@ export default class Homepage extends Component {
           <SmallItem title="Next Class" style={styles.small_item}></SmallItem>
         </View>
         <View style={{ display: "flex", flexDirection: "row" }}>
-          <Text style={styles.attendance_rate}>97% Attendance Rate</Text>
-          <Text style={styles.attendance_rate}>82% On-time Rate</Text>
+          <Text style={styles.attendance_rate}>
+            {this.state.attendanceRate}% Attendance Rate
+          </Text>
+          <Text style={styles.attendance_rate}>
+            {this.state.tardyRate}% Tardy Rate
+          </Text>
         </View>
         <Taskbar navigation={navigation}></Taskbar>
       </View>
