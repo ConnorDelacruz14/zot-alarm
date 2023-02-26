@@ -64,16 +64,24 @@ export default class Homepage extends Component {
           <SmallItem
             title="Total Tuition Lost"
             style={styles.small_item}
+            text={"$" + this.state.tuitionLost}
+            text_color={this.state.tuitionLost < 70 ? "red" : "gold"}
           ></SmallItem>
           <SmallItem title="Next Class" style={styles.small_item}></SmallItem>
         </View>
         <View style={{ display: "flex", flexDirection: "row" }}>
-          <Text style={styles.attendance_rate}>
-            {this.state.attendanceRate}% Attendance Rate
-          </Text>
-          <Text style={styles.attendance_rate}>
-            {this.state.tardyRate}% Tardy Rate
-          </Text>
+          <SmallItem
+            title="Attendance Rate"
+            style={styles.small_item}
+            text={"  " + this.state.attendanceRate + "%"}
+            text_color={this.state.attendanceRate < 70 ? "red" : "green"}
+          ></SmallItem>
+          <SmallItem
+            title="Tardy Rate"
+            style={styles.small_item}
+            text={"  " + this.state.tardyRate + "%"}
+            text_color={this.state.tardyRate > 30 ? "red" : "green"}
+          ></SmallItem>
         </View>
         <Taskbar navigation={navigation}></Taskbar>
       </View>
