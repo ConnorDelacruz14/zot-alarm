@@ -34,6 +34,7 @@ export default class Homepage extends Component {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
         this.setState({
           attendanceRate: data.attendance_rate * 100,
           tardyRate: data.tardy_rate * 100,

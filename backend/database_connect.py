@@ -61,7 +61,20 @@ def GetClassInfo(email: str, password: str) -> tuple:
     )
     connection = users.cursor()
     connection.execute("SELECT * FROM users WHERE email = %s AND password = %s", (email, password))
-    return (connection.fetchone())
+    return connection.fetchone()
+
+
+def GetGlobalInfo() -> tuple:
+    global_ = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="S3RJGY8jfRbow02D%i6U",
+        database="zot_alarm",
+    )
+    connection = global_.cursor()
+    connection.execute("SELECT * FROM global LIMIT 5")
+    return connection.fetchall()
+    
 
 
 if __name__ == "__main__":

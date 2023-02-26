@@ -28,4 +28,9 @@ def AddAllClasses(email: str, classes: list[dict]) -> None:
 
 def LoadClasses(user_data) -> dict:
     info_tuple = database_connect.GetClassInfo(user_data["email"], user_data["password"])
-    return {"attendance_rate": info_tuple[5], "tardy_rate": info_tuple[7], "classes_attended": info_tuple[3], "total_classes": info_tuple[4], "late_classes": info_tuple[6], "class_1": info_tuple[8], "class_2": info_tuple[9], "class_3": info_tuple[10], "class_4": info_tuple[11], "class_5": info_tuple[12]}
+    return {"attendance_rate": info_tuple[5], "tardy_rate": info_tuple[7], "classes_attended": info_tuple[3], "total_classes": info_tuple[4], "late_classes": info_tuple[6], "class_1": info_tuple[8], "class_2": info_tuple[9], "class_3": info_tuple[10], "class_4": info_tuple[11], "class_5": info_tuple[12]} | {"global": LoadGlobal()}
+
+
+def LoadGlobal() -> list:
+    info_tuple = database_connect.GetGlobalInfo()
+    return [code[0] for code in info_tuple]
