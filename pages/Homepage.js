@@ -17,6 +17,8 @@ export default class Homepage extends Component {
       tardyRate: 0,
       tuitionLost: 0,
       nextClass: "",
+      today_missed_classes: {},
+      user_missed_classes: {},
     };
   }
 

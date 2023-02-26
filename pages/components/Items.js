@@ -5,7 +5,12 @@ export class Item extends Component {
   render() {
     return (
       <Pressable style={this.props.style}>
-        <Text style={{ textAlign: "center", paddingBottom: 30 }}>
+        <Text
+          style={{
+            textAlign: "center",
+            paddingBottom: 30,
+          }}
+        >
           {this.props.title}
         </Text>
         <View style={{ flexDirection: "column" }}>
