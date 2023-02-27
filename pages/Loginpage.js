@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Image,
   Pressable,
@@ -9,14 +9,32 @@ import {
   View,
   Alert,
 } from "react-native";
+import * as Location from "expo-location";
 
 export default function Loginpage({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [location, setLocation] = useState(null);
+
   let login_info = {
     email: "",
     password: "",
+    location: null,
   };
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      login_info.location = location;
+      setLocation(location);
+    })();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -47,6 +65,7 @@ export default function Loginpage({ navigation }) {
             } else {
               login_info.email = email;
               login_info.password = password;
+              login_info.location = location;
               fetch("http://10.8.23.244:5000/process_data", {
                 method: "POST",
                 headers: {
@@ -61,7 +80,6 @@ export default function Loginpage({ navigation }) {
                   return response.json();
                 })
                 .then((data) => {
-                  console.log(data);
                   if (data["status"] == "new_account") {
                     navigation.navigate("CourseAdd", {
                       login_info: login_info,

@@ -4,21 +4,18 @@ import Alarms from "./Alarms";
 import Graphs from "./Graphs";
 import { Item, SmallItem } from "./components/Items";
 import React, { Component } from "react";
-import * as Location from "expo-location";
-
 export default class Homepage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       location: null,
-      errorMsg: null,
       attendanceRate: 0,
       tardyRate: 0,
       tuitionLost: 0,
       nextClass: "",
-      today_missed_classes: {},
-      user_missed_classes: {},
+      today_missed_classes: [],
+      user_missed_classes: [],
     };
   }
 
@@ -34,11 +31,11 @@ export default class Homepage extends Component {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         this.setState({
           attendanceRate: data.attendance_rate * 100,
           tardyRate: data.tardy_rate * 100,
           tuitionLost: 122 * (data.total_classes - data.classes_attended),
+          today_missed_classes: data.global,
         });
       })
       .catch((error) => {
