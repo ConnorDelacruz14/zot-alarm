@@ -60,7 +60,6 @@ def GetGlobalInfo() -> tuple:
     return connection.fetchall()
     
 
-
 if __name__ == "__main__":
     print(FirstLogin("test_user1@uci.edu", "password")) # Should be False
     print(CorrectLoginInfo("test_user1@uci.edu", "password")) # Should be True
