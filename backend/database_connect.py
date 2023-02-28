@@ -12,34 +12,34 @@ config = {
     'database': 'zot_alarm',
 }
 
-def AddUser(email: str, password: str) -> None:
+def UpdateTable(query: str, values=()) -> None:
     users = mysql.connector.connect(**config)
     connection = users.cursor()
-    connection.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
-
+    connection.execute(query, values)
     users.commit()
     connection.close()
+
+
+def ReceiveData(query: str, values) -> tuple:
+    users = mysql.connector.connect(**config)
+    connection = users.cursor()
+    connection.execute(query, values)
+    return connection.fetchone()
+
+
+def AddUser(email: str, password: str) -> None:
+    UpdateTable("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
 
 
 def AddClass(email: str, class_num: int, class_code: int) -> None:
-    users = mysql.connector.connect(**config)
-    connection = users.cursor()
-    connection.execute("UPDATE users SET class_%s = %s WHERE email = %s", [class_num, class_code, email])
-    users.commit()
-    connection.close()
+    UpdateTable("UPDATE users SET class_%s = %s WHERE email = %s", (class_num, class_code, email))
     
 
 def FirstLogin(email: str, password: str) -> bool:
-    users = mysql.connector.connect(**config)
-    connection = users.cursor()
-    connection.execute("SELECT id FROM users WHERE email = %s", [email])
-
-    if connection.fetchone():
+    if ReceiveData("SELECT id FROM users WHERE email = %s", [email]):
         return False
     
-    connection.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
-    users.commit()
-    connection.close()
+    UpdateTable("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
     return True
 
 
@@ -50,11 +50,8 @@ def CorrectLoginInfo(email: str, password: str) -> bool:
 
 
 def GetClassInfo(email: str, password: str) -> tuple:
-    users = mysql.connector.connect(**config)
-    connection = users.cursor()
-    connection.execute("SELECT * FROM users WHERE email = %s AND password = %s", (email, password))
-    return connection.fetchone()
-
+    return ReceiveData("SELECT * FROM users WHERE email = %s AND password = %s", (email, password))
+    
 
 def GetGlobalInfo() -> tuple:
     global_ = mysql.connector.connect(**config)
