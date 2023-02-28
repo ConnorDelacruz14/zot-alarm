@@ -1,3 +1,4 @@
 node_modules
 .expo
-.pyc
+*.pyc
+backend\__pycache__\
