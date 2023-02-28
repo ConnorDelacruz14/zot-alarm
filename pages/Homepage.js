@@ -9,18 +9,18 @@ export default class Homepage extends Component {
     super(props);
 
     this.state = {
-      location: null,
       attendanceRate: 0,
       tardyRate: 0,
       tuitionLost: 0,
       nextClass: "",
       today_missed_classes: [],
       user_missed_classes: [],
+      user_in_class: null,
     };
   }
 
   handleSendData = (user_data) => {
-    fetch("http://10.8.23.244:5000/process_data", {
+    fetch("http://10.8.16.53:5000/process_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,6 +37,7 @@ export default class Homepage extends Component {
           tuitionLost: 122 * (data.total_classes - data.classes_attended),
           today_missed_classes: data.global,
         });
+        console.log(this.state);
       })
       .catch((error) => {
         console.error(error);

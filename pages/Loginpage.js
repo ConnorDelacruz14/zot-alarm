@@ -66,7 +66,7 @@ export default function Loginpage({ navigation }) {
               login_info.email = email;
               login_info.password = password;
               login_info.location = location;
-              fetch("http://10.8.23.244:5000/process_data", {
+              fetch("http://10.8.16.53:5000/process_data", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
