@@ -57,58 +57,72 @@ export default function Loginpage({ navigation }) {
           onChangeText={(text) => setPassword(text)}
         ></TextInput>
       </View>
-      <Pressable
-        title="login-btn"
-        style={styles.login_btn}
-        onPress={() => {
-          if (email != "" && password != "") {
-            if (!email.includes("@uci.edu")) {
-              Alert.alert("Please enter a valid UCI email.");
-            } else {
-              login_info.email = email;
-              login_info.password = password;
-              login_info.location = location;
-              fetch("http://10.8.20.229:5000/process_data", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  login_info: login_info,
-                  request: "login",
-                }),
-              })
-                .then((response) => {
-                  return response.json();
+      {location ? (
+        <Pressable
+          title="login-btn"
+          style={styles.login_btn}
+          onPress={() => {
+            if (email != "" && password != "") {
+              if (!email.includes("@uci.edu")) {
+                Alert.alert("Please enter a valid UCI email.");
+              } else {
+                login_info.email = email;
+                login_info.password = password;
+                login_info.location = location;
+                fetch("http://10.8.20.229:5000/process_data", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    login_info: login_info,
+                    request: "login",
+                  }),
                 })
-                .then((data) => {
-                  if (data["status"] == "new_account") {
-                    navigation.navigate("CourseAdd", {
-                      login_info: login_info,
-                    });
-                  } else if (data["status"] == "correct_login") {
-                    navigation.navigate("Homepage", {
-                      from: "LoginPage",
-                      request: "load_global",
-                      login_info: login_info,
-                    });
-                  } else if (data["status"] == "incorrect_login") {
-                    Alert.alert("Incorrect password for the given email.");
-                  } else if (data["status"] == "error") {
-                    Alert.alert(
-                      "There was an error logging in. Try again later."
-                    );
-                  }
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
+                  .then((response) => {
+                    return response.json();
+                  })
+                  .then((data) => {
+                    if (data["status"] == "new_account") {
+                      navigation.navigate("CourseAdd", {
+                        login_info: login_info,
+                      });
+                    } else if (data["status"] == "correct_login") {
+                      navigation.navigate("Homepage", {
+                        from: "LoginPage",
+                        request: "load_global",
+                        login_info: login_info,
+                      });
+                    } else if (data["status"] == "incorrect_login") {
+                      Alert.alert("Incorrect password for the given email.");
+                    } else if (data["status"] == "error") {
+                      Alert.alert(
+                        "There was an error logging in. Try again later."
+                      );
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              }
             }
-          }
-        }}
-      >
-        <Text style={styles.login_text}>Login</Text>
-      </Pressable>
+          }}
+        >
+          <Text style={styles.login_text}>Login</Text>
+        </Pressable>
+      ) : (
+        <View style={styles.location_error}>
+          <Image
+            source={{
+              uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Exclamation_Circle_Red.svg/16px-Exclamation_Circle_Red.svg.png",
+            }}
+            style={styles.location_icon}
+          />
+          <Text style={styles.location_error_text}>
+            Please enable location to continue.
+          </Text>
+        </View>
+      )}
       <StatusBar style="auto" />
     </View>
   );
@@ -119,6 +133,25 @@ const styles = StyleSheet.create({
     marginTop: -240,
     width: 400,
     height: 200,
+  },
+
+  location_error: {
+    flexDirection: "row",
+    alignItems: "center",
+    color: "red",
+    marginTop: 10,
+  },
+
+  location_icon: {
+    width: 20,
+    height: 20,
+    marginRight: 5,
+    color: "red",
+  },
+  location_error_text: {
+    color: "red",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 
   container: {
