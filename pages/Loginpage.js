@@ -26,7 +26,9 @@ export default function Loginpage({ navigation }) {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
+        Alert.alert(
+          "Permission to access location was denied, you must enable location to use this app!"
+        );
         return;
       }
 
@@ -66,7 +68,7 @@ export default function Loginpage({ navigation }) {
               login_info.email = email;
               login_info.password = password;
               login_info.location = location;
-              fetch("http://169.234.6.154:5000/process_data", {
+              fetch("http://10.8.20.229:5000/process_data", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

@@ -29,7 +29,7 @@ export default class CourseAdd extends Component {
   }
 
   handleSendData = (user_data) => {
-    fetch("http://169.234.6.154:5000/process_data", {
+    fetch("http://10.8.20.229:5000/process_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

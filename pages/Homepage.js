@@ -1,6 +1,12 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Linking,
+} from "react-native";
 import Friends from "./Friends";
-import Alarms from "./Alarms";
 import Graphs from "./Graphs";
 import { Item, SmallItem } from "./components/Items";
 import React, { Component } from "react";
@@ -20,7 +26,7 @@ export default class Homepage extends Component {
   }
 
   handleSendData = (user_data) => {
-    fetch("http://169.234.6.154:5000/process_data", {
+    fetch("http://10.8.20.229:5000/process_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +101,8 @@ const Taskbar = ({ navigation }) => {
     <View style={styles.taskbar_container}>
       <Pressable
         onPress={() => {
-          navigation.navigate(Alarms);
+          // navigation.navigate(Alarms);
+          Linking.openURL("https://apps.apple.com/us/app/clock/id1584215688");
         }}
       >
         <Image

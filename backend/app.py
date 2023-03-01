@@ -5,11 +5,6 @@ import login
 app = Flask(__name__)
 CORS(app)
 
-def printData(class_list) -> None:
-  print("Number of classes: ", len(class_list))
-  for _class in class_list:
-    print(_class)
-
 
 @app.route("/process_data", methods=["POST"])
 def process_data() -> dict:

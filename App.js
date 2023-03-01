@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Homepage from "./pages/Homepage";
 import Loginpage from "./pages/Loginpage";
 import CourseAdd from "./pages/CourseAdd";
-import Alarms from "./pages/Alarms";
 import Friends from "./pages/Friends";
 import Graphs from "./pages/Graphs";
 
@@ -28,15 +27,6 @@ export default function App() {
             headerBackVisible: false,
           })}
         />
-        <Stack.Screen
-          name="Alarms"
-          component={Alarms}
-          options={() => ({
-            headerStyle: {
-              backgroundColor: "black",
-            },
-          })}
-        ></Stack.Screen>
         <Stack.Screen name="Friends" component={Friends}></Stack.Screen>
         <Stack.Screen name="Graphs" component={Graphs}></Stack.Screen>
       </Stack.Navigator>
